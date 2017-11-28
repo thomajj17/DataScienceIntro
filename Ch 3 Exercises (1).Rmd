@@ -1,0 +1,65 @@
+--
+title: "Chapter 3 Exercises 3.1,3.4,  and 3.5"
+author: "Kim Roth"
+date: "8/31/2017"
+output: html_document
+---
+
+This is the template file for Exercises 3.1 and 3.5 in chapter 3. You are welcome to make your own file if you prefer. Upload the markdown file to moodle. You are welcome to upload the knitted html file if desired as well.
+
+This chunk loads all needed packages including the data. Load this first. Or just load all the chunks before you start.
+```{r}
+library(mosaicData)
+library(tidyverse)
+library("mdsr")
+```
+
+Exercise 3.1 
+__
+This uses the Galton data set. To see a description of the variables, type Galton in the help tab in the lower right window.
+```{r}
+head(Galton)
+```
+
+1. Create a scatterplot of each person's height again their father's height.
+```{r}
+ggplot(data = Galton, mapping = aes(x = height, y = father)) +geom_point()
+```
+2. Seperate your plot into facets by sex.
+```{r}
+ggplot(data = Galton, mapping = aes(x = height, y = sex)) +geom_point() 
+```
+3. Add regression lines to all of your facets.
+```{r}
+ggplot(data = Galton, mapping = aes(x = height, y = sex)) +geom_point() + geom_smooth(method="lm", se=0)
+```
+
+Exercise 3.4
+___
+
+1. Create an informative and meaningful data graphic.
+```{r}
+ggplot(data = Galton, mapping = aes(x = family, y = nkids)) +geom_point()
+```
+
+2. Indentify each of the visual cues that you are using. 
+```{r}
+'''color, position
+```
+3. Create a data graphic for at least five variables. Do not worry about meaning here, just get five variables into the plot.
+```{r}
+ggplot(data = Galton, mapping = aes(x = height, y = sex, size = nkids) +geom_point()
+```
+
+Exercise 3.5
+___
+
+This uses data MLB_teams. To see variable descriptions, type MLB_teams into the help tab in the lower right corner window.
+```{r}
+head(MLB_teams, 4)
+```
+
+See how many variables you can illustrate on a single plot in R. The current reecord is 7.  (note as the book notes this is not always a good idea)
+```{r}
+ggplot(data = MLB_teams, mapping = aes(x = yearID, y = teamID)
+```

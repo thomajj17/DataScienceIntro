@@ -1,0 +1,51 @@
+---
+title: "Chapter 4 Exercises"
+output: html_document
+---
+necessary standard libraries
+```{r}
+library(tidyverse)
+library(mdsr)
+library(data.table)
+```
+
+Check out the cars dataset
+```{r}
+str(mtcars)
+mtcars
+```
+Ensure that the car name is a column and not just the row name.  Use a new table called 'mycars'.
+```{r}
+mycars = cbind(rownames(mtcars),mtcars) #adds the row names as a new column
+mycars #That column name isnt' good let's fix it
+mycars=rename(mycars,carname="rownames(mtcars)")
+#could use setnames(mycars,"rownames(mtcars)","carname")
+mycars
+```
+
+
+Create a dataframe from 'mycars' that has only the columns of carname, mpg, cyl and gear.  Call the new dataframe 'simplecars'. Show your results
+
+```{r}
+simplecars = select(mycars, carname ,mpg,cyl, gear)
+simplecars
+```
+Create a new dataframe from 'simplecars' called 'cars20to30' that contains only the cars rated between 20 and 30 miles per gallon including 20 and 30 (although in this case = doesn't matter). Show your results.
+```{r}
+cars20to30 = filter(mycars,mpg>20,mpg<30)
+cars20to30
+```
+Ensure this cars20to30 dataframe's data is sorted from best to worst in miles per gallon.  Show your results.
+```{r}
+cars20to30 = arrange(cars20to30,desc(mpg))
+cars20to30
+```
+From the original data set 'mycars', list the average mpg for each of the different numbers of cylinders. Include number number cars with thoses cylindesr. Use the group_by() and summarize() functions. Save the results in a dataset called 'cylmpg'.  Then generate an appropriate graph of the resulting 3 variables from 'cylmpg'.
+```{r}
+cylmpg = summarize(group_by(mycars,cyl), average = mean(mpg), cars = n())
+cylmpg
+```
+Make a new dataframe 'carps' using mutate() that includes a new column 'powerspeed' that is the ratio of horsepower(hp) to  quarter mile time (qsec). Display the data in order of powerspeed, with only these columns of interest. Which car is the highest in powerspeed? Least? 
+```{r}
+carps = mutate()
+```
